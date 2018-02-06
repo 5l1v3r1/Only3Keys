@@ -6,15 +6,9 @@ WHY: just cause. for the lulz.
 #include <ncurses.h>
 #include <stdio.h> // fprintf()
 #include <stdlib.h> // exit()
-#include <unistd.h> // getopt()
 
-// these seem to be unneeded?
-#include <string.h>
-#include <ctype.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-
-#include "ascii2.h"
+#include "ascii.h"
+#include "getopt.h"
 
 #define SHIFTBYTE(a) if (++(a) >= 8) (a) = 1;
 
@@ -46,37 +40,7 @@ int main(int argc, char** argv) {
   //FILE *fifo;
   int in_char = 0;
   int out_char = 0;
-  // GNU getopt() vars
-  //opterr = 0; //uncomment to silence getopt() errors
-  int flags = 0; // 0x10 - colormode, 0x01 - ascii chart
-  char *pipename = "/tmp/only3keys";
-  int index;
-  int c;
-
-  // parse options and fail early if invalid options
-  while ((c = getopt (argc, argv, "acp:")) != -1)
-    switch (c) {
-      case 'a':
-        flags |= 0x01;
-        break;
-
-      case 'c':
-        flags |= 0x10;
-        break;
-
-      case 'p':
-        pipename = optarg;
-        break;
-
-      default:
-        printf("Exiting!\n");
-        exit(EXIT_FAILURE);
-      }
-
-  printf ("flags = 0x%x, cvalue = %s\n", flags, pipename);
-
-  for(index = optind; index < argc; index++)
-    printf ("Non-option argument %s\n", argv[index]);
+  int flags = getCommandLineOptions(argc, argv);
 
   //mkfifo(pipename, 0666);
   //fifo = fopen(pipename, "wb");
@@ -107,28 +71,9 @@ int main(int argc, char** argv) {
   while(true) {
     binarystr(out_char);
 
-    // print the current keycode
     clear();
     printCurrentCode(0,0,out_char);
-
-
-    //print the ascii legend
-    for(int row = 0; row < (sizeof ascii_legend / sizeof ascii_legend[0]); row++) {
-        mvaddstr(4+row, 10, ascii_legend[row]);
-    }
-
-    //print the ascii chart (with colors?)
-    //TODO: magic numbers - get rid of them.
-    for(int row = 0; row < 16; row++) {
-            move(6+row, 10);
-            for (int i = 0; i < 9; i++ ) {
-                //if reachable { color = on };
-                addstr(ascii_chart2[row][i]);
-                addstr(" ");
-                // color = off;
-            }
-    }
-
+    printAsciiChart(4,10, flags);
     refresh();
 
     // currently hard coding the keys, and providing several options
