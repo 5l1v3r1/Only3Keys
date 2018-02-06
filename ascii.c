@@ -38,7 +38,7 @@ void printAsciiChart(int y, int x, int flags) {
 
 //print the ascii chart (with colors?)
 //TODO: magic numbers - get rid of them.
-for(int row = 0; row < 16; row++) {
+for(int row = 0; row < 18; row++) {
         move(y+2+row, x);
         for (int i = 0; i < 9; i++ ) {
             //if reachable { color = on };
