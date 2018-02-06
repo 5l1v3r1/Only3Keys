@@ -9,8 +9,10 @@ Only3keys is a userspace application that allows you to type using only 3 keys!
  - Did your keyboard burst into flames magically and destroy all but 3 keys?
  - Maybe you're just super 1337 and you bought one of these!
 
+<img src="https://i.redditmedia.com/1ATFrALLO1hwn5lo_lM7GJsaWhRPAha2A9NVK2XyVzk.jpg?w=320&s=9f99622008b513f6cec31cb21ed790fc" alt="SuperCoder 3000" style="width: 200px"/>
+<img src="https://i.ytimg.com/vi/NOLnWUeRovw/maxresdefault.jpg" alt="2 Keys" style="width: 200px;"/>
+<img src="http://skillprogramming.com/images/pictuers/keyboard_for_stackoverflow_users.jpg" alt="Stack overflow Keyboard" style="width: 200px;"/>
 
- (insert images of 3 key keyboards here)
 
  Well don't worry! I got you!
 
